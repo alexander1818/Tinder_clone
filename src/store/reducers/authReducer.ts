@@ -1,4 +1,4 @@
-import { IAuthModal, IAuthModalAction, AuthModalActions, TAuthModalAction } from '../types';
+import { IAuthModal, AuthModalActions, TAuthModalAction } from '../types';
 
 const initialState: IAuthModal = {
   open: false,

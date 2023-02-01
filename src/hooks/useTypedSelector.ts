@@ -4,4 +4,4 @@ import { AppDispatch } from '../store';
 import { RootState } from '../store/reducers';
 
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
-export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useTypedDispatch: () => AppDispatch = useDispatch;

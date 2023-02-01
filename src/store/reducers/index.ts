@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import { Action, AnyAction, combineReducers } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { authModalReducer } from './authReducer';
 
 export const rootReducer = combineReducers({
@@ -6,3 +7,5 @@ export const rootReducer = combineReducers({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type TypedDispatch = ThunkDispatch<RootState, any, AnyAction>;
+export type TypedThunk<R = void> = ThunkAction<R, RootState, unknown, Action>;

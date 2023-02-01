@@ -7,7 +7,14 @@
 }
 
 .home {
-    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    h1 {
+        text-align: center;
+        width: 100%;
+    }
 }
 
 .primary-button {
