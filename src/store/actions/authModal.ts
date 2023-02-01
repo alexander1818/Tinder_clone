@@ -1,8 +1,5 @@
-import { Dispatch } from 'redux';
-import { AuthModalActions, IAuthModal, IAuthModalAction, TAuthModalAction } from '../types';
+import { AuthModalActions, TAuthModalAction } from '../types';
 
-export const authModaOpenlAction = () => {
-  return (dispatch: Dispatch<TAuthModalAction>) => {
-    dispatch({ type: AuthModalActions.SHOW_AUTH_MODAL });
-  };
+export const authModaOpenlAction = (): TAuthModalAction => {
+  return { type: AuthModalActions.SHOW_AUTH_MODAL };
 };

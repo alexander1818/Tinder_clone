@@ -19,5 +19,9 @@ nav {
         padding: 10px 20px;
         border-radius: 10px;
         border: none;
+        &:disabled {
+            background-color: rgb(180,180,180);
+            color: rgb(160,38,75);
+        }
     }
 }

@@ -1,20 +1,17 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import AuthModal from '../../components/auth/AuthModal';
 import Navigation from '../../components/navigation/Navigation';
-import { useAppDispatch, useTypedSelector } from '../../hooks/useTypedSelector';
-import { authModaOpenlAction } from '../../store/actions/authModal';
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
-const Home = () => {
-  const dispatch = useAppDispatch();
+const Home: FC = () => {
+  const { authModaOpenlAction } = useActions();
   const { open } = useTypedSelector((state) => state.authModal);
-  console.log(open);
-  const [showAuthModal, setShowAuthModal] = useState(false);
 
   const handleAuthModal = () => {
-    // setShowAuthModal(!showAuthModal);
-    dispatch(authModaOpenlAction());
+    authModaOpenlAction();
   };
+
   const authToken = false;
   return (
     <div className="overlay">
@@ -24,7 +21,7 @@ const Home = () => {
         <button className="primary-button" onClick={() => handleAuthModal()}>
           {authToken ? 'Signout' : 'Create Account'}
         </button>
-        {showAuthModal && <AuthModal />}
+        {open && <AuthModal />}
       </div>
     </div>
   );
