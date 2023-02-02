@@ -4,7 +4,7 @@ import Logo from './logo/Logo';
 const Navigation = () => {
   const { open } = useTypedSelector((state) => state.authModal);
   //TODO: if auth true
-  const auth = false;
+  const auth = true;
   const handleLogin = () => {
     //
   };
