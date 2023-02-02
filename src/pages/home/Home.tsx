@@ -17,7 +17,7 @@ const Home: FC = () => {
     <div className="overlay">
       <Navigation />
       <div className="home">
-        <h1>Swipe right&reg;</h1>
+        <h1 className="home__primery-title">Swipe right&reg;</h1>
         <button className="primary-button" onClick={() => handleAuthModal()}>
           {authToken ? 'Signout' : 'Create Account'}
         </button>
