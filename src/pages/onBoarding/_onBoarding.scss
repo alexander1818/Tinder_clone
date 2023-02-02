@@ -1,0 +1,55 @@
+.onBoarding {
+    border-top: solid 2px rgb(219,219,219);
+    &__form {
+        display: flex;
+        justify-content: center;
+        section {
+            display: flex;
+            flex-direction: column;
+            width: 35%;
+            padding: 20px;
+        }
+        
+        input {
+            padding: 15px 30px;
+            margin: 10px 0;
+            font-size: 15px;
+            border: solid 2px rgb(219,219,219);
+            border-radius: 10px;
+        }
+        input[type="number"] {
+            width: 40px;
+            margin-right: 10px;
+        }
+        input[type="radio"] {
+            display: none;
+        }
+        input[type="radio"]:checked + label {
+            border: solid 2px rgb(216, 82, 70)
+        }
+        input::-webkit-inner-spin-button,
+        input::-webkit-outer-spin-button {
+            appearance: none;
+            margin: 0;
+        }
+        input[type="submit"]:hover {
+            background: rgb(235,235,235);
+        }
+        &__multiple-input-container {
+            display: flex;
+            label {
+                padding: 5px;
+                border: solid 2px rgb(144,144,144);
+                border-radius: 10px;
+                margin-right: 5px;
+                transition: all .3s;
+                cursor: pointer;
+            }
+        }
+        &__photo-container {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

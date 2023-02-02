@@ -15,7 +15,6 @@ const Home: FC = () => {
   const authToken = false;
   return (
     <div className="overlay">
-      <Navigation />
       <div className="home">
         <h1 className="home__primery-title">Swipe right&reg;</h1>
         <button className="primary-button" onClick={() => handleAuthModal()}>
