@@ -1,19 +1,9 @@
 import { FC, useState } from 'react';
-
-type TNewAccount = {
-  first_name: string;
-  dob_day: string;
-  dob_month: string;
-  dob_year: string;
-  show_gender: boolean;
-  gender_identity: string;
-  gender_interest: string;
-  url: string;
-  about: string;
-  matches: [];
-};
+import { useActions } from '../../hooks/useActions';
+import { TNewAccount } from '../../store/types';
 
 const Onboarding: FC = () => {
+  const { createAccountAction } = useActions();
   const [accountData, setAccountData] = useState<TNewAccount>({
     first_name: '',
     dob_day: '',
@@ -27,8 +17,6 @@ const Onboarding: FC = () => {
     matches: [],
   });
 
-  console.log(accountData);
-
   const handleChangeFields = (e: React.FormEvent<HTMLInputElement>) => {
     const name = e.currentTarget.name;
     const value =
@@ -38,6 +26,7 @@ const Onboarding: FC = () => {
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    createAccountAction(accountData);
   };
   return (
     <div className="onBoarding">
