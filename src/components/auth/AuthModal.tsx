@@ -2,12 +2,22 @@ import React, { FC, useState } from 'react';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { useActions } from '../../hooks/useActions';
 
+type TAuthAccountData = {
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 const AuthModal: FC = () => {
-  const { authModaOpenlAction } = useActions();
-  const [accountForm, setAccountForm] = useState({ email: '', password: '', confirmPassword: '' });
+  const { authModalOpenAction } = useActions();
+  const [accountForm, setAccountForm] = useState<TAuthAccountData>({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
 
   const handleCloseModal = () => {
-    authModaOpenlAction();
+    authModalOpenAction();
   };
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {

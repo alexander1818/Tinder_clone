@@ -5,11 +5,11 @@ import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const Home: FC = () => {
-  const { authModaOpenlAction } = useActions();
+  const { authModalOpenAction } = useActions();
   const { open } = useTypedSelector((state) => state.authModal);
 
   const handleAuthModal = () => {
-    authModaOpenlAction();
+    authModalOpenAction();
   };
 
   const authToken = false;
