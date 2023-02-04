@@ -1,9 +1,0 @@
-{
-  "bracketSpacing": true,
-  "printWidth": 160,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "importOrder": ["^react(.*)$", "^@reduxjs/(.*)$", "^classnames$", "^formik$", "^@mui/(.*)$", "^[./]"],
-  "importOrderSeparation": true,
-  "endOfLine": "auto"
-}
