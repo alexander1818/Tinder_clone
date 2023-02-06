@@ -8,7 +8,7 @@ const ChatInput: FC = () => {
   };
   return (
     <div className="chat-input">
-      ChatInput
+      Chat Input
       <textarea value={value} onChange={handleChangeFields} />
       <button className="secondary-button">Submit</button>
     </div>
