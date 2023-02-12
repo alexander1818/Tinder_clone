@@ -1,6 +1,7 @@
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-const NotFound = () => (
+const NotFound: FC = () => (
   <div>
     <p>Page not found</p>
     <p>

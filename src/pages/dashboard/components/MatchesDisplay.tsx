@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-const MatchesDisplay = () => {
+const MatchesDisplay: FC = () => {
   return <div className="matches-display">MatchesDisplay</div>;
 };
 
