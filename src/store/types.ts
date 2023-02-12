@@ -4,6 +4,13 @@ export enum AuthModalActions {
   CLOSE_AUTH_MODAL = 'CLOSE_AUTH_MODAL',
 }
 
+export enum AuthActions {
+  CREATE_ACCOUNT = 'CREATE_ACCOUNT',
+  CREATE_ACCOUNT_SUCCESS = 'CREATE_ACCOUNT_SUCCESS',
+  CREATE_ACCOUNT_ERROR = 'CREATE_ACCOUNT_ERROR',
+  CREATE_ACCOUNT_UPDATE = 'CREATE_ACCOUNT_UPDATE',
+}
+
 export interface IAuthModal {
   open: boolean;
   loading: boolean;
@@ -24,6 +31,12 @@ interface ICloseAuthModal {
 export type TAuthModalAction = IShowAuthModal | ICloseAuthModal;
 
 //NewAccount
+export type TAuthAccountData = {
+  username: string;
+  password: string;
+  confirmPassword?: string;
+};
+
 export type TNewAccount = {
   first_name: string;
   dob_day: string;

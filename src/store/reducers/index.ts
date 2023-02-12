@@ -1,9 +1,11 @@
 import { Action, AnyAction, combineReducers } from 'redux';
 import { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { authModalReducer } from './authReducer';
+import { authModalReducer } from './authModalReducer';
+import { createAccountlReducer } from './createAccountReducer';
 
 export const rootReducer = combineReducers({
   authModal: authModalReducer,
+  createAccount: createAccountlReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

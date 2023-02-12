@@ -3,8 +3,8 @@ import Logo from './logo/Logo';
 
 const Navigation = () => {
   const { open } = useTypedSelector((state) => state.authModal);
-  //TODO: if auth true
-  const auth = true;
+  const { isCreatedUser } = useTypedSelector((state) => state.createAccount);
+
   const handleLogin = () => {
     //
   };
@@ -13,7 +13,7 @@ const Navigation = () => {
       <div className="logo-container">
         <Logo />
       </div>
-      {!auth && (
+      {!isCreatedUser && (
         <button
           onClick={() => handleLogin()}
           className="logo-container__nav-button"

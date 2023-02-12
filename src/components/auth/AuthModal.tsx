@@ -1,17 +1,12 @@
 import React, { FC, useState } from 'react';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { useActions } from '../../hooks/useActions';
-
-type TAuthAccountData = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import { TAuthAccountData } from '../../store/types';
 
 const AuthModal: FC = () => {
-  const { authModalOpenAction } = useActions();
+  const { authModalOpenAction, createAccountAction } = useActions();
   const [accountForm, setAccountForm] = useState<TAuthAccountData>({
-    email: '',
+    username: '',
     password: '',
     confirmPassword: '',
   });
@@ -22,6 +17,7 @@ const AuthModal: FC = () => {
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    createAccountAction({ ...accountForm });
   };
 
   const handleChangeFields = (e: React.FormEvent<HTMLInputElement>) => {
@@ -43,11 +39,11 @@ const AuthModal: FC = () => {
       </p>
       <form className="auth-modal__form" onSubmit={handleSubmitForm}>
         <input
-          type="email"
-          name="email"
+          type="text"
+          name="username"
           placeholder="Email"
           required={true}
-          value={accountForm.email}
+          value={accountForm.username}
           onChange={handleChangeFields}
         />
         <input
@@ -62,7 +58,7 @@ const AuthModal: FC = () => {
           type="confirmPassword"
           name="confirmPassword"
           placeholder="ConfirmPassword"
-          required={true}
+          // required={true}
           value={accountForm.confirmPassword}
           onChange={handleChangeFields}
         />

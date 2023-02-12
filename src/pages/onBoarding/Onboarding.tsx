@@ -26,7 +26,7 @@ const Onboarding: FC = () => {
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createAccountAction(accountData);
+    // createAccountAction(accountData);
   };
   return (
     <div className="onBoarding">

@@ -1,8 +1,11 @@
 nav {
+    position: fixed;
+    top: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
 }
 
 .logo-container {
@@ -13,6 +16,7 @@ nav {
         width: 100%;
     }
     &__nav-button {
+        margin: 15px;
         color: rgb(254,48,114);
         background-color: #fff;
         font-size: 20px;

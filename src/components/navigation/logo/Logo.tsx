@@ -1,10 +1,12 @@
 import whiteLogo from '../../../assets/images/tinder_logo_white.png';
 import colorLogo from '../../../assets/images/color-logo-tinder.png';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
 
 const Logo = () => {
-  //TODO: if auth true
-  const auth = true;
-  return <img className="logo-container__logo" src={auth ? colorLogo : whiteLogo} alt="" />;
+  const { isCreatedUser } = useTypedSelector((state) => state.createAccount);
+  return (
+    <img className="logo-container__logo" src={isCreatedUser ? colorLogo : whiteLogo} alt="" />
+  );
 };
 
 export default Logo;
