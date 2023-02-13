@@ -1,15 +1,26 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import closeIcon from '../../assets/images/close-icon.svg';
 import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { mainRoutes } from '../../Routes/Routes';
 import { TAuthAccountData } from '../../store/types';
 
 const AuthModal: FC = () => {
+  const navigate = useNavigate();
   const { authModalOpenAction, createAccountAction } = useActions();
+  const { isCreatedUser } = useTypedSelector((state) => state.createAccount);
   const [accountForm, setAccountForm] = useState<TAuthAccountData>({
     username: '',
     password: '',
     confirmPassword: '',
   });
+
+  useEffect(() => {
+    if (isCreatedUser) {
+      navigate(mainRoutes.onBoarding.path);
+    }
+  }, [isCreatedUser]);
 
   const handleCloseModal = () => {
     authModalOpenAction();

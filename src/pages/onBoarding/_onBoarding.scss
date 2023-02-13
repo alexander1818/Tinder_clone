@@ -1,6 +1,8 @@
 .onBoarding {
+    margin-top: 80px;
     border-top: solid 2px rgb(219,219,219);
     &__form {
+        width: 100%;
         display: flex;
         justify-content: center;
         section {
