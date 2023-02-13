@@ -12,34 +12,47 @@ export type TActions = {
   error: TActionType;
 };
 
-async function http(path: string, config: RequestInit, { dispatch, success, error }: TActions) {
-  const request = new Request(path, config);
-  const response = await fetch(request);
-
-  await response
-    .json()
-    .then((result) => {
-      if (!response.ok) {
-        const error = (result && result.message) || response.statusText;
-        return Promise.reject(error);
-      }
-      dispatch({ type: success.type, payload: result.data });
-    })
-    .catch((err) => dispatch({ type: error.type, payload: err }));
-}
-
 const headers = {
   'Content-Type': 'application/json',
 };
 
-export async function authQuery<T, U>(body: T, path: string, actions: TActions): Promise<void> {
+async function http(path: string, config: RequestInit) {
+  const request = new Request(path, config);
+  const response = await fetch(request);
+
+  return await response
+    .json()
+    .then((result) => {
+      return { result, response };
+    })
+    .catch((err) => {
+      return err;
+    });
+}
+
+// eslint-disable-next-line prettier/prettier
+export async function authQuery<T>(body: T, path: string, { dispatch, success, error }: TActions) {
   const config = {
     method: 'POST',
     body: JSON.stringify(body),
     headers,
   };
 
-  return await http(`${API.mainPath}${path}`, config, { ...actions });
+  const { result, response } = await http(`${API.mainPath}${path}`, config);
+  console.log('result', result);
+  if (response.status === 201 || response.status === 200) {
+    const { data, refresh_token, access_token } = result;
+
+    localStorage.setItem('user', JSON.stringify(data));
+    localStorage.setItem('refresh_token', refresh_token);
+    localStorage.setItem('access_token', access_token);
+
+    return dispatch({ type: success.type, payload: data });
+  }
+
+  if (response.status === 401) {
+    return dispatch({ type: error.type, payload: result.message || response.statusText });
+  }
 }
 
 const authorizationHeaders = { Authorization: `${localStorage.getItem('accessToken')}` };
@@ -57,7 +70,7 @@ export async function httpQuery<U>(method: string, path: string, actions: TActio
       },
       body: JSON.stringify(body),
     };
-    return await http(`${API.mainPath}${path}`, config, { ...actions });
+    return await http(`${API.mainPath}${path}`, config);
   } else if (method === 'GET' && authorizationHeaders.Authorization) {
     const config = {
       method,
@@ -67,7 +80,7 @@ export async function httpQuery<U>(method: string, path: string, actions: TActio
       },
     };
 
-    return await http(`${API.mainPath}${path}`, config, { ...actions });
+    return await http(`${API.mainPath}${path}`, config);
   }
-  return await http(`${API.mainPath}${path}`, { method, headers }, { ...actions });
+  return await http(`${API.mainPath}${path}`, { method, headers });
 }
