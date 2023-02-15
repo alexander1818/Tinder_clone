@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import AuthModal from '../../components/auth/AuthModal';
-import Navigation from '../../components/navigation/Navigation';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { AuthModalActions } from '../../store/types';
 
 const Home: FC = () => {
   const { authModalOpenAction } = useActions();
   const { open } = useTypedSelector((state) => state.authModal);
 
   const handleAuthModal = () => {
-    authModalOpenAction();
+    authModalOpenAction(AuthModalActions.REGISTRATION_FORM_INDEX);
   };
 
   const authToken = false;
