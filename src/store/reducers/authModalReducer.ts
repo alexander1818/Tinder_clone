@@ -2,16 +2,15 @@ import { IAuthModal, AuthModalActions, TAuthModalAction } from '../types';
 
 const initialState: IAuthModal = {
   open: false,
-  loading: false,
-  error: null,
+  authFormIndex: null,
 };
 
 export const authModalReducer = (state = initialState, action: TAuthModalAction): IAuthModal => {
   switch (action.type) {
     case AuthModalActions.SHOW_AUTH_MODAL:
-      return { open: !state.open, loading: false, error: null };
+      return { open: true, authFormIndex: action.payload };
     case AuthModalActions.CLOSE_AUTH_MODAL:
-      return { open: false, loading: false, error: null };
+      return { open: false, authFormIndex: action.payload };
     default:
       return state;
   }

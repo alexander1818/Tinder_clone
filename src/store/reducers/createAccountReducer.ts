@@ -1,11 +1,5 @@
 import { TActionType } from '../../api/fetchWrapper';
-import { AuthActions } from '../types';
-
-type TCreateUserInitState = {
-  isCreatedUser: boolean;
-  data: string;
-  isError: string;
-};
+import { AuthActions, TCreateUserInitState } from '../types';
 
 const initialState: TCreateUserInitState = {
   isCreatedUser: false,

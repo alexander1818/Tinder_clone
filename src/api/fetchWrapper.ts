@@ -55,7 +55,7 @@ export async function authQuery<T>(body: T, path: string, { dispatch, success, e
   }
 }
 
-const authorizationHeaders = { Authorization: `${localStorage.getItem('accessToken')}` };
+const authorizationHeaders = { Authorization: `${localStorage.getItem('access_token')}` };
 
 export async function httpQuery<U>(method: string, path: string, actions: TActions, body?: U) {
   if (

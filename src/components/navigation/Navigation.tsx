@@ -1,12 +1,15 @@
+import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { AuthModalActions } from '../../store/types';
 import Logo from './logo/Logo';
 
 const Navigation = () => {
+  const { authModalOpenAction } = useActions();
   const { open } = useTypedSelector((state) => state.authModal);
   const { isCreatedUser } = useTypedSelector((state) => state.createAccount);
 
   const handleLogin = () => {
-    //
+    authModalOpenAction(AuthModalActions.LOGIN_FORM_INDEX);
   };
   return (
     <nav>
