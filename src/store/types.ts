@@ -15,6 +15,12 @@ export enum AuthActions {
   LOGIN_USER_ERROR = 'LOGIN_USER_ERROR',
 }
 
+export enum UserActions {
+  USER_ME_SUCCESS = 'USER_ME_SUCCESS',
+  USER_ME_ERROR = 'USER_ME_ERROR',
+  USER_ACCOUNT_UPDATE = 'USER_ACCOUNT_UPDATE',
+}
+
 export interface IAuthModal {
   open: boolean;
   authFormIndex: number | null;
@@ -71,4 +77,14 @@ export type TLoginUserInitState = {
 export type TLoginData = {
   username: string;
   password: string;
+};
+
+//User
+export type TUserInitState = {
+  user: User;
+  isError: string;
+};
+export type User = {
+  username: string;
+  id: string;
 };
