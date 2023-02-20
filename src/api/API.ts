@@ -3,4 +3,5 @@ export enum API {
   registrationPath = '/auth/registration',
   loginPath = '/auth/login',
   logOut = '/',
+  userMe = '/users/me',
 }

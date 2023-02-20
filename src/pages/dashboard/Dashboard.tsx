@@ -1,6 +1,7 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ChatContainer from './components/ChatContainer';
 import TinderCard from 'react-tinder-card';
+import { useActions } from '../../hooks/useActions';
 
 const db = [
   {
@@ -27,7 +28,14 @@ const db = [
 
 const Dashboard: FC = () => {
   const characters = db;
+  const { getUserMeAction } = useActions();
   const [lastDirection, setLastDirection] = useState<string>('');
+
+  useEffect(() => {
+    return () => {
+      getUserMeAction();
+    };
+  }, []);
 
   const swiped = (direction: string, nameToDelete: string) => {
     console.log('removing: ' + nameToDelete);

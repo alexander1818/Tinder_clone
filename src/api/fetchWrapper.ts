@@ -55,12 +55,12 @@ export async function authQuery<T>(body: T, path: string, { dispatch, success, e
   }
 }
 
-const authorizationHeaders = { Authorization: `${localStorage.getItem('access_token')}` };
-
-export async function httpQuery<U>(method: string, path: string, actions: TActions, body?: U) {
+// eslint-disable-next-line prettier/prettier
+export async function httpQuery<U>(method: string, path: string, { dispatch, success, error }: TActions, body?: U) {
+  const authorizationHeaders = { authorization: `${localStorage.getItem('access_token')}` };
   if (
     (method === 'POST' || method === 'PUT' || method === 'PATCH') &&
-    authorizationHeaders.Authorization
+    authorizationHeaders.authorization
   ) {
     const config = {
       method,
@@ -71,7 +71,7 @@ export async function httpQuery<U>(method: string, path: string, actions: TActio
       body: JSON.stringify(body),
     };
     return await http(`${API.mainPath}${path}`, config);
-  } else if (method === 'GET' && authorizationHeaders.Authorization) {
+  } else if (method === 'GET' && authorizationHeaders.authorization) {
     const config = {
       method,
       headers: {
@@ -80,7 +80,13 @@ export async function httpQuery<U>(method: string, path: string, actions: TActio
       },
     };
 
-    return await http(`${API.mainPath}${path}`, config);
+    const { result, response } = await http(`${API.mainPath}${path}`, config);
+
+    if (response.status === 401) {
+      return dispatch({ type: error.type, payload: result.message || response.statusText });
+    }
+
+    return dispatch({ type: success.type, payload: result });
   }
   return await http(`${API.mainPath}${path}`, { method, headers });
 }
