@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { mainRoutes } from '../Routes/Routes';
 import { API } from './API';
 
 export type TActionType = {
@@ -81,12 +82,39 @@ export async function httpQuery<U>(method: string, path: string, { dispatch, suc
     };
 
     const { result, response } = await http(`${API.mainPath}${path}`, config);
+    console.log(response);
 
-    if (response.status === 401) {
-      return dispatch({ type: error.type, payload: result.message || response.statusText });
+    if (result.message === 'jwt expired') {
+      const prevActions = { dispatch, success, error };
+
+      dispatch({ type: error.type, payload: result.message || response.statusText });
+      const res = await refreshToken(prevActions);
+
+      return dispatch({ type: res?.type, payload: res?.payload });
+    }
+    if (response.statusText === 'Unauthorized') {
+      window.location.href = mainRoutes.home.path;
+      return;
     }
 
     return dispatch({ type: success.type, payload: result });
   }
   return await http(`${API.mainPath}${path}`, { method, headers });
 }
+
+export async function refreshToken({ dispatch, success, error }: TActions) {
+  const username = localStorage.getItem('user');
+  const refresh_token = localStorage.getItem('refresh_token');
+
+  return await authQuery({ refresh_token, username }, API.refreshToken, {
+    dispatch,
+    success,
+    error,
+  });
+}
+
+export const handleLogout = () => {
+  localStorage.clear();
+  window.location.href = mainRoutes.home.path;
+  return;
+};

@@ -11,7 +11,7 @@ const ChatHeader: FC = () => {
         <div className="profile__img-container">
           <img src="" alt="" />
         </div>
-        <h3>{user.username}</h3>
+        <h3>{user && user.username}</h3>
       </div>
       <i className="log-out-icon">&#8656;</i>
     </div>

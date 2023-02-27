@@ -4,4 +4,5 @@ export enum API {
   loginPath = '/auth/login',
   logOut = '/',
   userMe = '/users/me',
+  refreshToken = '/auth/refresh',
 }
