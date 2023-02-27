@@ -44,15 +44,17 @@ export async function authQuery<T>(body: T, path: string, { dispatch, success, e
   if (response.status === 201 || response.status === 200) {
     const { data, refresh_token, access_token } = result;
 
-    localStorage.setItem('user', JSON.stringify(data));
+    localStorage.setItem('user', data);
     localStorage.setItem('refresh_token', refresh_token);
     localStorage.setItem('access_token', access_token);
 
     return dispatch({ type: success.type, payload: data });
   }
 
-  if (response.status === 401) {
-    return dispatch({ type: error.type, payload: result.message || response.statusText });
+  if (result.error.message === 'jwt expired') {
+    dispatch({ type: error.type, payload: result.error.message || response.statusText });
+    localStorage.clear();
+    return;
   }
 }
 
@@ -88,12 +90,12 @@ export async function httpQuery<U>(method: string, path: string, { dispatch, suc
       const prevActions = { dispatch, success, error };
 
       dispatch({ type: error.type, payload: result.message || response.statusText });
-      const res = await refreshToken(prevActions);
+      const refreshTokenResult = await refreshToken(prevActions);
 
-      return dispatch({ type: res?.type, payload: res?.payload });
+      return dispatch({ type: refreshTokenResult?.type, payload: refreshTokenResult?.payload });
     }
     if (response.statusText === 'Unauthorized') {
-      window.location.href = mainRoutes.home.path;
+      dispatch({ type: error.type, payload: result.message || response.statusText });
       return;
     }
 
