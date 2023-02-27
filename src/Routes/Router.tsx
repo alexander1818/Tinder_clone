@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import { mainRoutes } from './Routes';
 
 const InternalRouter: FC = () => {

@@ -81,6 +81,7 @@ export type TLoginData = {
 
 //User
 export type TUserInitState = {
+  isAuthUser: boolean;
   user: User;
   isError: string;
 };
